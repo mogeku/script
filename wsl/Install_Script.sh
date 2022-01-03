@@ -130,7 +130,14 @@ chsh -s /usr/bin/fish
 figlet 'tools'
 sudo apt install -y tree
 sudo apt install -y curl
+sudo apt install -y tldr
 
+# 安装exa
+sudo ln -s ~/.config/script/exa/bin/exa /usr/local/bin/exa
+sudo cp ~/.config/script/exa/completions/exa.fish /usr/share/fish/vendor_completions.d/
+sudo cp ~/.config/script/exa/man/* /usr/share/man/man1/
+
+# 安装wsl-open
 sudo cp ~/.config/script/wsl/wsl-open /usr/local/bin/wsl-open
 sudo chmod +x /usr/local/bin/wsl-open 
 wsl-open ~/.config/script/wsl/SetRegedit.bat
