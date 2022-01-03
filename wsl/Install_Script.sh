@@ -21,6 +21,9 @@ deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted u
 
 sudo apt update
 
+# 设置sudo的超时为10分钟
+sudo sed -i 's/env_reset$/env_reset,timestamp_timeout=10/' /etc/sudoers
+
 # 拷贝ssh key
 cp -r .ssh ~/.ssh
 chmod 700 ~/.ssh/id_rsa
@@ -153,3 +156,5 @@ git config --global user.name "momo"
 
 # 完成;
 figlet 'finished'
+
+$SHELL
