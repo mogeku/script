@@ -116,14 +116,14 @@ sudo apt install -y lazygit
 # autojump
 figlet 'autojump'
 git clone https://github.com/wting/autojump.git ~/tmp
-~/tmp/install.py
-rm -rf ~/tmp
+cd ~/tmp && ./install.py
+cd ~ && rm -rf ~/tmp
 
 # fish
 figlet 'fish'
-sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt-add-repository -y ppa:fish-shell/release-3
 sudo apt update
-sudo apt install fish
+sudo apt install -y fish
 chsh -s /usr/bin/fish
 
 # 安装一些工具；
