@@ -64,10 +64,13 @@ sudo apt install -y python3 python3-dev
 echo python3 version:
 python3 --version
 
+sudo rm -rf /usr/bin/python
+sudo ln -s /usr/bin/python3 /usr/bin/python
+
 # 安装 nvim
 figlet 'nvim'
-sudo add-apt-repository -y ppa:neovim-ppa/stable
-sudo apt-get update
+sudo apt-add-repository -y ppa:neovim-ppa/stable
+sudo apt update
 sudo apt install -y neovim
 git clone git@github.com:mogeku/nvim.git ~/.config/nvim
 nvim
@@ -106,9 +109,22 @@ mkdir -p ~/.local/share/Trash/files
 
 # lazygit
 figlet 'lazygit'
-sudo add-apt-repository -y ppa:lazygit-team/release
-sudo apt-get update
-sudo apt-get install -y lazygit
+sudo apt-add-repository -y ppa:lazygit-team/release
+sudo apt update
+sudo apt install -y lazygit
+
+# autojump
+figlet 'autojump'
+git clone https://github.com/wting/autojump.git ~/tmp
+~/tmp/install.py
+rm -rf ~/tmp
+
+# fish
+figlet 'fish'
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt update
+sudo apt install fish
+chsh -s /usr/bin/fish
 
 # 安装一些工具；
 figlet 'tools'
@@ -118,11 +134,6 @@ sudo apt install -y curl
 sudo cp ~/.config/script/wsl/wsl-open /usr/local/bin/wsl-open
 sudo chmod +x /usr/local/bin/wsl-open 
 wsl-open ~/.config/script/wsl/SetRegedit.bat
-
-
-mkdir -p ~/.local/script
-sudo curl -o ~/.local/script/z.sh https://raw.githubusercontent.com/rupa/z/master/z.sh
-sudo chmod +x ~/.local/script/z.sh
 
 # 配置git
 git config --global user.email "1209816754@qq.com"
