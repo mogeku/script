@@ -158,8 +158,8 @@ then
 
     # 配置git
     wsl-open $cur_dir/../windows/AddSshKey.bat
-    sudo mv /usr/bin/git /usr/bin/gitu
-    sudo ln -s $(which git.exe) /usr/bin/git
+    sudo cp ~/.config/script/wsl/git /usr/local/bin/git
+    sudo chmod +x /usr/local/bin/git
 fi
 
 # 配置git
