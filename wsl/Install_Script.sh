@@ -1,3 +1,6 @@
+# 配置变量
+cur_dir=$(pwd)
+
 # 更换阿里源;
 sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
 sudo rm -rvf /etc/apt/sources.list
@@ -145,10 +148,19 @@ sudo cp ~/.config/script/exa/man/* /usr/share/man/man1/
 sudo apt install -y fd-find
 sudo ln -s $(which fdfind) /usr/local/bin/fd
 
-# 安装wsl-open
-sudo cp ~/.config/script/wsl/wsl-open /usr/local/bin/wsl-open
-sudo chmod +x /usr/local/bin/wsl-open 
-wsl-open ~/.config/script/wsl/SetRegedit.bat
+# 配置wsl
+if test $(WSL_DISTRO_NAME)
+then
+    # 安装wsl-open
+    sudo cp ~/.config/script/wsl/wsl-open /usr/local/bin/wsl-open
+    sudo chmod +x /usr/local/bin/wsl-open 
+    wsl-open ~/.config/script/wsl/SetRegedit.bat
+
+    # 配置git
+    wsl-open $cur_dir/../windows/AddSshKey.bat
+    sudo mv /usr/bin/git /usr/bin/gitu
+    sudo ln -s $(which git.exe) /usr/bin/git
+fi
 
 # 配置git
 git config --global user.email "1209816754@qq.com"
