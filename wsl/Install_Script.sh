@@ -52,7 +52,7 @@ node --version
 
 # 安装gcc, g++, make, clang
 figlet 'c/c++'
-sudo apt install -y gcc g++ clang make
+sudo apt install -y gcc g++ gdb clang make
 
 # 安装golang
 figlet 'golang'
@@ -66,7 +66,7 @@ sudo apt install -y python2 python2-dev
 echo python2 version:
 python2 --version
 figlet 'python3'
-sudo apt install -y python3 python3-dev
+sudo apt install -y python3 python3-dev python3-pip
 echo python3 version:
 python3 --version
 
@@ -115,7 +115,8 @@ mkdir -p ~/.local/share/Trash/files
 
 # cmake
 figlet 'cmake'
-sudo apt install -y cmake
+sudo python -m pip install --upgrade pip
+sudo python -m pip install cmake
 
 # lazygit
 figlet 'lazygit'
