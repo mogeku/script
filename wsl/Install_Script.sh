@@ -113,6 +113,10 @@ mkdir -p ~/.local/share/Trash/files
 # figlet 'i3'
 # sudo apt install -y i3
 
+# cmake
+figlet 'cmake'
+sudo apt install -y cmake
+
 # lazygit
 figlet 'lazygit'
 sudo apt-add-repository -y ppa:lazygit-team/release
