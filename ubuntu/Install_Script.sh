@@ -39,6 +39,9 @@ sudo apt install -y curl
 sudo apt install -y tldr
 sudo apt install -y ripgrep
 
+sudo apt install -y apt-file
+sudo apt-file update
+
 # 安装exa
 sudo ln -s ~/.config/script/exa/bin/exa /usr/local/bin/exa
 sudo cp ~/.config/script/exa/completions/exa.fish /usr/share/fish/vendor_completions.d/
@@ -58,6 +61,12 @@ figlet ".config"
 rm -rf ~/.config
 git clone --recurse-submodules git@github.com:mogeku/.config.git ~/.config
 rm ~/.bashrc && ln -s ~/.config/.bashrc ~/.bashrc
+
+# dwm
+figlet 'dwm'
+sudo apt install -y xorg libx11-dev libxft-dev libxinerama-dev suckless-tools dmenu
+git clone git@github.com:mogeku/dwm.git ~/.config/dwm
+cd ~/.config/dwm && sudo make clean install
 
 # 安装node.js
 figlet 'node.js'
@@ -125,10 +134,6 @@ sudo apt install -y rar             # 压缩文件
 ranger --copy-config=all
 
 mkdir -p ~/.local/share/Trash/files
-
-# # 安装 i3；
-# figlet 'i3'
-# sudo apt install -y i3
 
 # cmake
 figlet 'cmake'
