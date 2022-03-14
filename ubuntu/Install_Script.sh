@@ -104,7 +104,7 @@ sudo npm i -g bash-language-server
 # 安装nerd font
 figlet 'NerdFont'
 mkdir -p ~/.local/share/fonts
-cd ~/.local/share/fonts && curl -fLo "JetBrains Mono Bold Nerd Font Complete Mono.ttf" https://gitub.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Bold/complete/JetBrains%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttfh
+cd ~/.local/share/fonts && curl -fLo "JetBrains Mono Bold Nerd Font Complete Mono.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Bold/complete/JetBrains%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf
 
 安装 ranger;
 figlet 'ranger'
