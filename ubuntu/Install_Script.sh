@@ -68,6 +68,11 @@ sudo apt install -y xorg libx11-dev libxft-dev libxinerama-dev suckless-tools dm
 git clone git@github.com:mogeku/dwm.git ~/.config/dwm
 cd ~/.config/dwm && sudo make clean install
 
+# st
+figlet 'st'
+git clone git@github.com:mogeku/st.git ~/.config/st
+cd ~/.config/st && sudo make clean install
+
 # 安装node.js
 figlet 'node.js'
 # NodeSource 添加NodeSource源, 安装最新版本的nodejs
