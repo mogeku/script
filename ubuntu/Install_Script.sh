@@ -56,12 +56,16 @@ sudo ln -s $(which fdfind) /usr/local/bin/fd
 figlet "figlet"
 sudo apt install -y figlet
 
-# 对系统的中文路径做一个软链接;
 figlet ".config"
 # 拉取.config目录
 rm -rf ~/.config
 git clone --recurse-submodules git@github.com:mogeku/.config.git ~/.config
 rm ~/.bashrc && ln -s ~/.config/.bashrc ~/.bashrc
+
+figlet "scripts"
+# 拉取.config目录
+rm -rf ~/scripts
+git clone git@github.com:mogeku/script.git ~/scripts
 
 # 安装dwm
 figlet 'dwm'
