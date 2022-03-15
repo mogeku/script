@@ -32,6 +32,18 @@ cp -r .ssh ~/.ssh
 chmod 700 ~/.ssh/id_rsa
 
 
+# 拉取.config目录
+figlet ".config"
+rm -rf ~/.config
+git clone --recurse-submodules git@github.com:mogeku/.config.git ~/.config
+rm ~/.bashrc && ln -s ~/.config/.bashrc ~/.bashrc
+
+# 拉取.config目录
+figlet "scripts"
+rm -rf ~/scripts
+git clone git@github.com:mogeku/script.git ~/scripts
+
+
 # 安装一些工具；
 figlet 'tools'
 sudo apt install -y tree
@@ -56,17 +68,6 @@ sudo ln -s $(which fdfind) /usr/local/bin/fd
 # 安装一个终端打印标题的软件;
 figlet "figlet"
 sudo apt install -y figlet
-
-figlet ".config"
-# 拉取.config目录
-rm -rf ~/.config
-git clone --recurse-submodules git@github.com:mogeku/.config.git ~/.config
-rm ~/.bashrc && ln -s ~/.config/.bashrc ~/.bashrc
-
-figlet "scripts"
-# 拉取.config目录
-rm -rf ~/scripts
-git clone git@github.com:mogeku/script.git ~/scripts
 
 # 安装dwm
 figlet 'dwm'
@@ -127,7 +128,7 @@ figlet 'NerdFont'
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts && curl -fLo "JetBrains Mono Bold Nerd Font Complete Mono.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Bold/complete/JetBrains%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf
 
-安装 ranger;
+# 安装 ranger;
 figlet 'ranger'
 sudo apt install -y ranger     	    # ranger 的主程序
 sudo apt install -y caca-utils 	    # img2txt 图片
@@ -160,9 +161,9 @@ sudo apt install -y lazygit
 
 # autojump
 figlet 'autojump'
-git clone https://github.com/wting/autojump.git ~/tmp
-cd ~/tmp && ./install.py
-cd ~ && rm -rf ~/tmp
+git clone https://github.com/wting/autojump.git ~/tmp1111
+cd ~/tmp1111 && ./install.py
+cd ~ && rm -rf ~/tmp1111
 
 # fish
 figlet 'fish'
