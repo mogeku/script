@@ -72,6 +72,7 @@ figlet 'dwm'
 sudo apt install -y xorg libx11-dev libxft-dev libxinerama-dev suckless-tools dmenu
 git clone git@github.com:mogeku/dwm.git ~/.config/dwm
 cd ~/.config/dwm && sudo make clean install
+sudo cp ~/.config/dwm/dwm.desktop /usr/share/xsessions/
 
 # 安装st
 figlet 'st'
@@ -168,6 +169,21 @@ sudo apt-add-repository -y ppa:fish-shell/release-3
 sudo apt update
 sudo apt install -y fish
 chsh -s /usr/bin/fish
+
+# 安装edge
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
+sudo rm microsoft.gpg
+sudo apt update
+sudo apt install microsoft-edge-dev
+
+# 安装中文输入法
+sudo apt remove -y ibus
+sudo apt install -y fcitx
+sudo apt install -y fcitx-googlepinyin
+fcitx-configtool
+
 
 # 配置git
 git config --global user.email "1209816754@qq.com"
