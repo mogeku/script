@@ -38,6 +38,7 @@ sudo apt install -y tree
 sudo apt install -y curl
 sudo apt install -y tldr
 sudo apt install -y ripgrep
+sudo apt install -y feh
 
 sudo apt install -y apt-file
 sudo apt-file update
@@ -62,13 +63,13 @@ rm -rf ~/.config
 git clone --recurse-submodules git@github.com:mogeku/.config.git ~/.config
 rm ~/.bashrc && ln -s ~/.config/.bashrc ~/.bashrc
 
-# dwm
+# 安装dwm
 figlet 'dwm'
 sudo apt install -y xorg libx11-dev libxft-dev libxinerama-dev suckless-tools dmenu
 git clone git@github.com:mogeku/dwm.git ~/.config/dwm
 cd ~/.config/dwm && sudo make clean install
 
-# st
+# 安装st
 figlet 'st'
 git clone git@github.com:mogeku/st.git ~/.config/st
 cd ~/.config/st && sudo make clean install
