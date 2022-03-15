@@ -38,15 +38,16 @@ sudo apt install -y tree
 sudo apt install -y curl
 sudo apt install -y ripgrep
 sudo apt install -y feh
-sudo apt install -y tldr && tldr
+sudo apt install -y tldr
+tldr tldr
 
 sudo apt install -y apt-file
 sudo apt-file update
 
 # 安装exa
-sudo ln -s ~/.config/script/exa/bin/exa /usr/local/bin/exa
-sudo cp ~/.config/script/exa/completions/exa.fish /usr/share/fish/vendor_completions.d/
-sudo cp ~/.config/script/exa/man/* /usr/share/man/man1/
+sudo ln -s $HOME/.config/script/exa/bin/exa /usr/local/bin/exa
+sudo cp $HOME/.config/script/exa/completions/exa.fish /usr/share/fish/vendor_completions.d/
+sudo cp $HOME/.config/script/exa/man/* /usr/share/man/man1/
 
 # 安装 fd
 sudo apt install -y fd-find
@@ -72,7 +73,7 @@ figlet 'dwm'
 sudo apt install -y xorg libx11-dev libxft-dev libxinerama-dev suckless-tools dmenu
 git clone git@github.com:mogeku/dwm.git ~/.config/dwm
 cd ~/.config/dwm && sudo make clean install
-sudo cp ~/.config/dwm/dwm.desktop /usr/share/xsessions/
+sudo cp $HOME/.config/dwm/dwm.desktop /usr/share/xsessions/
 
 # 安装st
 figlet 'st'
