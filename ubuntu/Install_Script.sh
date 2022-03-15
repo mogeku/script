@@ -183,7 +183,9 @@ sudo apt install microsoft-edge-dev
 # 安装中文输入法
 sudo apt remove -y ibus
 sudo apt install -y fcitx
-sudo apt install -y fcitx-googlepinyin
+sudo apt install -y fcitx-sunpinyin
+im-config
+im-launch fcitx
 fcitx-configtool
 
 
