@@ -79,6 +79,7 @@ sudo cp $HOME/.config/dwm/dwm.desktop /usr/share/xsessions/
 
 # 安装st
 figlet 'st'
+sudo apt install -y fonts-symbola
 git clone git@github.com:mogeku/st.git ~/.config/st
 cd ~/.config/st && sudo make clean install
 
