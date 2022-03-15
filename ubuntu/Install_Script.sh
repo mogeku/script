@@ -46,6 +46,7 @@ git clone git@github.com:mogeku/script.git ~/scripts
 
 # 安装一些工具；
 figlet 'tools'
+sudo apt install -y neofetch
 sudo apt install -y tree
 sudo apt install -y curl
 sudo apt install -y ripgrep
@@ -143,6 +144,8 @@ sudo apt install -y fzf             # 模糊查找
 sudo apt install -y exiftool        # 图片信息查看
 sudo apt install -y atool           # 压缩文件
 sudo apt install -y rar             # 压缩文件
+
+sudo pip3 install ueberzug          # 图片预览
 
 ranger --copy-config=all
 
