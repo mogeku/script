@@ -36,9 +36,9 @@ chmod 700 ~/.ssh/id_rsa
 figlet 'tools'
 sudo apt install -y tree
 sudo apt install -y curl
-sudo apt install -y tldr
 sudo apt install -y ripgrep
 sudo apt install -y feh
+sudo apt install -y tldr && tldr
 
 sudo apt install -y apt-file
 sudo apt-file update
