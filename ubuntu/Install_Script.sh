@@ -1,3 +1,5 @@
+#!/bin/bash -e
+
 # 配置变量
 cur_dir=$(pwd)
 
@@ -27,22 +29,14 @@ sudo apt update
 # 设置sudo的超时为10分钟
 sudo sed -i 's/env_reset$/env_reset,timestamp_timeout=10/' /etc/sudoers
 
-# 拷贝ssh key
-cp -r .ssh ~/.ssh
-chmod 700 ~/.ssh/id_rsa
-
+# 安装一个终端打印标题的软件;
+sudo apt install -y figlet
 
 # 拉取.config目录
 figlet ".config"
 rm -rf ~/.config
 git clone --recurse-submodules git@github.com:mogeku/.config.git ~/.config
-rm ~/.bashrc && ln -s ~/.config/.bashrc ~/.bashrc
-
-# 拉取.config目录
-figlet "scripts"
-rm -rf ~/scripts
-git clone git@github.com:mogeku/script.git ~/scripts
-
+rm ~/.bashrc && ln -sf ~/.config/.bashrc ~/.bashrc
 
 # 安装一些工具；
 figlet 'tools'
@@ -58,17 +52,13 @@ sudo apt install -y apt-file
 sudo apt-file update
 
 # 安装exa
-sudo ln -s $HOME/.config/script/exa/bin/exa /usr/local/bin/exa
+sudo ln -sf $HOME/.config/script/exa/bin/exa /usr/local/bin/exa
 sudo cp $HOME/.config/script/exa/completions/exa.fish /usr/share/fish/vendor_completions.d/
 sudo cp $HOME/.config/script/exa/man/* /usr/share/man/man1/
 
 # 安装 fd
 sudo apt install -y fd-find
-sudo ln -s $(which fdfind) /usr/local/bin/fd
-
-# 安装一个终端打印标题的软件;
-figlet "figlet"
-sudo apt install -y figlet
+sudo ln -sf $(which fdfind) /usr/local/bin/fd
 
 # 安装dwm
 figlet 'dwm'
@@ -107,12 +97,12 @@ sudo apt install -y python2 python2-dev
 echo python2 version:
 python2 --version
 figlet 'python3'
-sudo apt install -y python3 python3-dev python3-pip
+sudo apt install -y gsettings-desktop-schemas python3 python3-dev python3-pip
 echo python3 version:
 python3 --version
 
 sudo rm -rf /usr/bin/python
-sudo ln -s /usr/bin/python3 /usr/bin/python
+sudo ln -sf /usr/bin/python3 /usr/bin/python
 
 # 安装 nvim
 figlet 'nvim'
