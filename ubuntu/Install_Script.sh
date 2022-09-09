@@ -51,14 +51,21 @@ tldr tldr
 sudo apt install -y apt-file
 sudo apt-file update
 
+# 安装 fd
+sudo apt install -y fd-find
+sudo ln -sf $(which fdfind) /usr/local/bin/fd
+
+# fish
+figlet 'fish'
+sudo apt-add-repository -y ppa:fish-shell/release-3
+sudo apt update
+sudo apt install -y fish
+chsh -s /usr/bin/fish
+
 # 安装exa
 sudo ln -sf $HOME/.config/script/exa/bin/exa /usr/local/bin/exa
 sudo cp $HOME/.config/script/exa/completions/exa.fish /usr/share/fish/vendor_completions.d/
 sudo cp $HOME/.config/script/exa/man/* /usr/share/man/man1/
-
-# 安装 fd
-sudo apt install -y fd-find
-sudo ln -sf $(which fdfind) /usr/local/bin/fd
 
 # 安装dwm
 figlet 'dwm'
@@ -158,13 +165,6 @@ figlet 'autojump'
 git clone https://github.com/wting/autojump.git ~/tmp1111
 cd ~/tmp1111 && ./install.py
 cd ~ && rm -rf ~/tmp1111
-
-# fish
-figlet 'fish'
-sudo apt-add-repository -y ppa:fish-shell/release-3
-sudo apt update
-sudo apt install -y fish
-chsh -s /usr/bin/fish
 
 # 安装edge
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
