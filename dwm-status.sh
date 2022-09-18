@@ -1,5 +1,7 @@
 #!/bin/sh
 
+IDENTIFIER="unicode"
+
 usbmon() {
 	usb1=$(lsblk -la | awk '/sdc1/ { print $1 }')
 	usb1mounted=$(lsblk -la | awk '/sdc1/ { print $7 }')
@@ -98,11 +100,29 @@ clock() {
 	echo " $dte  $time"
 }
 
+dwm_battery () {
+    # Change BAT1 to whatever your battery is identified as. Typically BAT0 or BAT1
+    CHARGE=$(cat /sys/class/power_supply/BAT0/capacity)
+    STATUS=$(cat /sys/class/power_supply/BAT0/status)
+
+    printf "%s" "$SEP1"
+    if [ "$IDENTIFIER" = "unicode" ]; then
+        if [ "$STATUS" = "Charging" ]; then
+            printf "🔌 %s%% %s" "$CHARGE" "$STATUS"
+        else
+            printf "🔋 %s%% %s" "$CHARGE" "$STATUS"
+        fi
+    else
+        printf "BAT %s%% %s" "$CHARGE" "$STATUS"
+    fi
+    printf "%s\n" "$SEP2"
+}
+
 main() {
 	while true; do
-		xsetroot -name " $(usbmon) $(ram) | $(cpu) | $(network) | $(volume_alsa) | $(clock)"
+        xsetroot -name "$(dwm_battery) $(usbmon) $(ram) | $(cpu) | $(network) | $(volume_alsa) | $(clock)"
 		sleep 1
 	done
 }
 
-mainO
+main

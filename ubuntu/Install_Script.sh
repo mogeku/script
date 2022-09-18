@@ -4,7 +4,9 @@
 cur_dir=$(pwd)
 
 # 更换阿里源;
-sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+if [ ! -e /etc/apt/sources.list.bak ]; then
+	sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+fi
 sudo rm -rvf /etc/apt/sources.list
 sudo touch /etc/apt/sources.list
 sudo chmod 777 /etc/apt/sources.list
@@ -74,6 +76,15 @@ git clone git@github.com:mogeku/dwm.git ~/.config/dwm
 cd ~/.config/dwm && sudo make clean install
 sudo cp $HOME/.config/dwm/dwm.desktop /usr/share/xsessions/
 
+# config dwm-status-bar
+sudo chmod +x $HOME/script/dwm-status.sh
+
+if [ ! -e /etc/rc.local ]; then
+    sudo touch /etc/rc.local
+fi
+sudo chmod 777 /etc/rc.local
+sudo echo "$HOME/script/dwm-status.sh &" >> /etc/rc.local
+
 # 安装st
 figlet 'st'
 sudo apt install -y fonts-symbola
@@ -117,15 +128,19 @@ sudo apt-add-repository -y ppa:neovim-ppa/stable
 sudo apt update
 sudo apt install -y neovim
 git clone git@github.com:mogeku/nvim.git ~/.config/nvim
-nvim
-sudo npm i -g bash-language-server
 # 新开一个终端开始安装 vimplus 编辑器;
-# gnome-terminal --window -e 'bash -c "sudo bash /home/jerome/desktop/_bash/vim_install.sh;exec bash"'
+gnome-terminal -- bash -c 'nvim;exec bash'
+sudo npm i -g bash-language-server;
+#nvim
 
 # 安装nerd font
 figlet 'NerdFont'
 mkdir -p ~/.local/share/fonts
-cd ~/.local/share/fonts && curl -fLo "JetBrains Mono Bold Nerd Font Complete Mono.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Bold/complete/JetBrains%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf
+cp ~/.config/fonts/JetBrains\ Mono\ Bold\ Nerd\ Font\ Complete\ Mono.ttf ~/.local/share/fonts/
+
+sudo chmod 744 ~/.local/share/fonts/JetBrains\ Mono\ Bold\ Nerd\ Font\ Complete\ Mono.ttf
+
+fc-cache -vf
 
 # 安装 ranger;
 figlet 'ranger'
@@ -167,6 +182,7 @@ cd ~/tmp1111 && ./install.py
 cd ~ && rm -rf ~/tmp1111
 
 # 安装edge
+figlet 'edge'
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/
 sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
