@@ -65,11 +65,7 @@ sudo cp $HOME/.config/dwm/dwm.desktop /usr/share/xsessions/
 # config dwm-status-bar
 sudo chmod +x $HOME/script/dwm-status.sh
 
-if [ ! -e /etc/rc.local ]; then
-    sudo touch /etc/rc.local
-fi
-sudo chmod 777 /etc/rc.local
-sudo echo "$HOME/script/dwm-status.sh &" >> /etc/rc.local
+sudo echo "$HOME/script/dwm-status.sh &" >> /etc/profile
 
 # 安装st
 figlet 'st'

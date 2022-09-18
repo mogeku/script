@@ -118,11 +118,8 @@ dwm_battery () {
     printf "%s\n" "$SEP2"
 }
 
-main() {
-	while true; do
-        xsetroot -name "$(dwm_battery) $(usbmon) $(ram) | $(cpu) | $(network) | $(volume_alsa) | $(clock)"
-		sleep 1
-	done
-}
+while true; do
+    xsetroot -name "$(dwm_battery) $(usbmon) $(ram) | $(cpu) | $(network) | $(volume_alsa) | $(clock)"
+    sleep 1
+done
 
-main
