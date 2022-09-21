@@ -34,6 +34,8 @@ sudo apt install -y curl
 sudo apt install -y ripgrep
 sudo apt install -y feh
 sudo apt install -y tldr
+sudo apt install -y openssl-server
+sudo apt install -y trayer
 tldr tldr
 
 sudo apt install -y apt-file
@@ -61,11 +63,6 @@ sudo apt install -y xorg libx11-dev libxft-dev libxinerama-dev suckless-tools dm
 git clone git@github.com:mogeku/dwm.git ~/.config/dwm
 cd ~/.config/dwm && sudo make clean install
 sudo cp $HOME/.config/dwm/dwm.desktop /usr/share/xsessions/
-
-# config dwm-status-bar
-sudo chmod +x $HOME/script/dwm-status.sh
-
-sudo echo "$HOME/script/dwm-status.sh &" >> /etc/profile
 
 # 安装st
 figlet 'st'

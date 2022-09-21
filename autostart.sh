@@ -1,4 +1,7 @@
 #!/bin/bash
 
-/bin/bash ~/scripts/dwm-status.sh &
-/bin/bash ~/scripts/random-switch-wallpaper.sh &
+/bin/bash ~/script/dwm-status-refresh.sh &
+/bin/bash ~/script/wp-autochange.sh &
+
+utools &
+nm-applet &

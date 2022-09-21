@@ -108,9 +108,9 @@ dwm_battery () {
     printf "%s" "$SEP1"
     if [ "$IDENTIFIER" = "unicode" ]; then
         if [ "$STATUS" = "Charging" ]; then
-            printf "🔌 %s%% %s" "$CHARGE" "$STATUS"
+            printf "🔌 %s%%" "$CHARGE"
         else
-            printf "🔋 %s%% %s" "$CHARGE" "$STATUS"
+            printf "🔋 %s%%" "$CHARGE"
         fi
     else
         printf "BAT %s%% %s" "$CHARGE" "$STATUS"
@@ -118,8 +118,5 @@ dwm_battery () {
     printf "%s\n" "$SEP2"
 }
 
-while true; do
-    xsetroot -name "$(dwm_battery) $(usbmon) $(ram) | $(cpu) | $(network) | $(volume_alsa) | $(clock)"
-    sleep 1
-done
+xsetroot -name "$(dwm_battery) | $(usbmon) $(ram) | $(cpu) | $(network) | $(volume_alsa) | $(clock)"
 
