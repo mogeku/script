@@ -36,6 +36,7 @@ sudo apt install -y feh
 sudo apt install -y tldr
 sudo apt install -y openssl-server
 sudo apt install -y trayer
+sudo apt install -y xsel xclip
 tldr tldr
 
 sudo apt install -y apt-file
@@ -181,6 +182,14 @@ fcitx-configtool
 # 配置git
 git config --global user.email "1209816754@qq.com"
 git config --global user.name "momo"
+
+# add some script
+if [ ! -e /usr/bin/explorer ];then 
+    sudo ln -s /usr/bin/nautilus /usr/bin/explorer 
+fi
+if [ ! -e /usr/bin/explorer ];then 
+    sudo ln -s ~/script/addssh.sh /usr/bin/addssh
+fi
 
 # 完成;
 figlet 'finished'
