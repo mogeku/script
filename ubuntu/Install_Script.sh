@@ -37,6 +37,8 @@ sudo apt install -y tldr
 sudo apt install -y openssl-server
 sudo apt install -y trayer
 sudo apt install -y xsel xclip
+sudo apt install -y blueman
+
 tldr tldr
 
 sudo apt install -y apt-file
@@ -180,8 +182,8 @@ fcitx-configtool
 
 
 # 配置git
-git config --global user.email "1209816754@qq.com"
-git config --global user.name "momo"
+# git config --global user.email "1209816754@qq.com"
+# git config --global user.name "momo"
 
 # add some script
 if [ ! -e /usr/bin/explorer ];then 

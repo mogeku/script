@@ -8,3 +8,4 @@
 utools &
 nm-applet &
 cfw &
+blueman-applet &
