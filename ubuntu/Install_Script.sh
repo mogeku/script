@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
 # 配置变量
-cur_dir=$(pwd)
+script_dir=$(cd `dirname $0`; pwd)
+home_dir=$(cd ~; pwd)
 
 # 更换阿里源;
 if [ ! -e /etc/apt/sources.list.bak ]; then
@@ -194,6 +195,9 @@ if [ ! -e /usr/bin/addssh ];then
 fi
 if [ ! -e /usr/bin/edge ];then 
     sudo ln -s /usr/bin/microsoft-edge /usr/bin/edge
+fi
+if [ ! -e /usr/bin/vmsudo ];then 
+    sudo ln -s $home_dir/script/vmsudo.sh /usr/bin/vmsudo
 fi
 
 # 完成;
