@@ -189,8 +189,11 @@ fcitx-configtool
 if [ ! -e /usr/bin/explorer ];then 
     sudo ln -s /usr/bin/nautilus /usr/bin/explorer 
 fi
-if [ ! -e /usr/bin/explorer ];then 
+if [ ! -e /usr/bin/addssh ];then 
     sudo ln -s ~/script/addssh.sh /usr/bin/addssh
+fi
+if [ ! -e /usr/bin/edge ];then 
+    sudo ln -s /usr/bin/microsoft-edge /usr/bin/edge
 fi
 
 # 完成;
