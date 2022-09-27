@@ -94,8 +94,8 @@ volume_alsa() {
 }
 
 clock() {
-	dte=$(date +"%D")
-	time=$(date +"%H:%M")
+    dte=$(date +"%Y/%m/%d(%a)")
+	time=$(date +"%H:%M:%S")
 
 	echo " $dte  $time"
 }
