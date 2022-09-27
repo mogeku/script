@@ -61,6 +61,17 @@ sudo ln -sf $HOME/.config/script/exa/bin/exa /usr/local/bin/exa
 sudo cp $HOME/.config/script/exa/completions/exa.fish /usr/share/fish/vendor_completions.d/
 sudo cp $HOME/.config/script/exa/man/* /usr/share/man/man1/
 
+# 安装 picom
+figlet 'picom'
+git clone https://github.com/yshui/picom.git ~/.config/picom
+git submodule update --init --recursive
+
+sudo apt install -y libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson
+
+meson --buildtype=release . build
+sudo ninja -C build install
+
+
 # 安装dwm
 figlet 'dwm'
 sudo apt install -y xorg libx11-dev libxft-dev libxinerama-dev suckless-tools dmenu

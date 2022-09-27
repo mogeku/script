@@ -9,3 +9,4 @@ utools &
 nm-applet &
 cfw &
 blueman-applet &
+picom -b
