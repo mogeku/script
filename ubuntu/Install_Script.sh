@@ -39,6 +39,7 @@ sudo apt install -y openssl-server
 sudo apt install -y trayer
 sudo apt install -y xsel xclip
 sudo apt install -y blueman
+sudo apt install -y xbacklight
 
 tldr tldr
 
@@ -196,6 +197,12 @@ fcitx-configtool
 # 配置git
 # git config --global user.email "1209816754@qq.com"
 # git config --global user.name "momo"
+
+# config backlight
+if [ ! -e /etc/X11/xorg.conf ]; then
+    sudo cp $script_dir/xorg.conf /etc/X11/xorg.conf
+    sudo chmod 644 /etc/X11/xorg.conf
+fi
 
 # add some script
 if [ ! -e /usr/bin/explorer ];then 
