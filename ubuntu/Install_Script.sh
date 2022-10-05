@@ -23,9 +23,24 @@ sudo apt install -y figlet
 
 # 拉取.config目录
 figlet ".config"
-rm -rf ~/.config
+sudo rm -rf ~/.config
 git clone --recurse-submodules git@github.com:mogeku/.config.git ~/.config
-rm ~/.bashrc && ln -sf ~/.config/.bashrc ~/.bashrc
+sudo rm ~/.bashrc && ln -sf ~/.config/.bashrc ~/.bashrc
+
+# 安装gcc, g++, make, clang
+figlet 'c/c++'
+sudo apt install -y gcc g++ gdb clang make
+
+
+# 安装中文输入法
+figlet fcitx
+sudo apt remove -y ibus
+sudo apt install -y fcitx
+sudo apt install -y fcitx-sunpinyin
+im-config
+im-launch fcitx
+fcitx-configtool
+
 
 # 安装一些工具；
 figlet 'tools'
@@ -35,7 +50,7 @@ sudo apt install -y curl
 sudo apt install -y ripgrep
 sudo apt install -y feh
 sudo apt install -y tldr
-sudo apt install -y openssl-server
+# sudo apt install -y openssl-server
 sudo apt install -y trayer
 sudo apt install -y xsel xclip
 sudo apt install -y blueman
@@ -55,9 +70,9 @@ figlet 'fish'
 sudo apt-add-repository -y ppa:fish-shell/release-3
 sudo apt update
 sudo apt install -y fish
-chsh -s /usr/bin/fish
 
 # 安装exa
+figlet 'exa'
 sudo ln -sf $HOME/.config/script/exa/bin/exa /usr/local/bin/exa
 sudo cp $HOME/.config/script/exa/completions/exa.fish /usr/share/fish/vendor_completions.d/
 sudo cp $HOME/.config/script/exa/man/* /usr/share/man/man1/
@@ -69,6 +84,7 @@ git submodule update --init --recursive
 
 sudo apt install -y libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson
 
+cd ~/.config/picom
 meson --buildtype=release . build
 sudo ninja -C build install
 
@@ -93,10 +109,6 @@ curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt install -y nodejs
 echo node.js version:
 node --version
-
-# 安装gcc, g++, make, clang
-figlet 'c/c++'
-sudo apt install -y gcc g++ gdb clang make
 
 # 安装golang
 figlet 'golang'
@@ -184,14 +196,6 @@ sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] h
 sudo rm microsoft.gpg
 sudo apt update
 sudo apt install microsoft-edge-dev
-
-# 安装中文输入法
-sudo apt remove -y ibus
-sudo apt install -y fcitx
-sudo apt install -y fcitx-sunpinyin
-im-config
-im-launch fcitx
-fcitx-configtool
 
 
 # 配置git
