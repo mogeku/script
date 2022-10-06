@@ -1,11 +1,11 @@
 #!/bin/bash
 
-light=$(xbacklight | awk -F . '{print $1}')
+cur_light=$(light | awk -F . '{print $1}')
 
-if [ $light -eq 100 ]; then
+if [ $cur_light -eq 100 ]; then
     echo 10
-    xbacklight -set 10
+    sudo light -S 10
 else
     echo 100
-    xbacklight -set 100
+    sudo light -S 100
 fi

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-xbacklight -inc 5
+sudo light -A 5

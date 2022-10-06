@@ -54,7 +54,8 @@ sudo apt install -y tldr
 sudo apt install -y trayer
 sudo apt install -y xsel xclip
 sudo apt install -y blueman
-sudo apt install -y xbacklight
+sudo apt install -y light
+sudo dpkg -i ~/script/ubuntu/bat_0.22.1_amd64.deb
 
 tldr tldr
 
@@ -133,7 +134,7 @@ sudo ln -sf /usr/bin/python3 /usr/bin/python
 figlet 'nvim'
 sudo apt-add-repository -y ppa:neovim-ppa/stable
 sudo apt update
-sudo apt install -y neovim
+sudo apt install -y neovim ccls
 git clone git@github.com:mogeku/nvim.git ~/.config/nvim
 # 新开一个终端开始安装 vimplus 编辑器;
 gnome-terminal -- bash -c 'nvim;exec bash'
