@@ -62,6 +62,12 @@ tldr tldr
 sudo apt install -y apt-file
 sudo apt-file update
 
+# bottom
+figlet 'btm'
+curl -LO https://github.com/ClementTsang/bottom/releases/download/0.6.8/bottom_0.6.8_amd64.deb
+sudo dpkg -i bottom_0.6.8_amd64.deb
+rm -rf bottom_0.6.8_amd64.deb
+
 # 安装 fd
 sudo apt install -y fd-find
 sudo ln -sf $(which fdfind) /usr/local/bin/fd
