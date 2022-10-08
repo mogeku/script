@@ -33,7 +33,7 @@ dwm_connman () {
     # if STRENGTH is empty, we have a wired connection
     if [ "$STRENGTH" ]; then
         # printf "%s %s %s%%" "$IP" "$CONNAME" "$STRENGTH"
-        printf "%s|%s%%" "$(echo $CONNAME | cut -b 1-2).." "$STRENGTH"
+        printf "%s|%s%%" "$(echo $CONNAME | cut -b 1-3).." "$STRENGTH"
     else
         printf "%s %s" "$IP" "$CONNAME"
     fi
