@@ -217,16 +217,19 @@ fi
 
 # add some script
 if [ ! -e /usr/bin/explorer ];then 
-    sudo ln -s /usr/bin/nautilus /usr/bin/explorer 
+    sudo ln -sf /usr/bin/nautilus /usr/bin/explorer 
 fi
 if [ ! -e /usr/bin/addssh ];then 
-    sudo ln -s ~/script/addssh.sh /usr/bin/addssh
+    sudo ln -sf ~/script/addssh.sh /usr/bin/addssh
 fi
 if [ ! -e /usr/bin/edge ];then 
-    sudo ln -s /usr/bin/microsoft-edge /usr/bin/edge
+    sudo ln -sf /usr/bin/microsoft-edge /usr/bin/edge
 fi
 if [ ! -e /usr/bin/vmsudo ];then 
-    sudo ln -s $home_dir/script/vmsudo.sh /usr/bin/vmsudo
+    sudo ln -sf $home_dir/script/vmsudo.sh /usr/bin/vmsudo
+fi
+if [ ! -e /usr/bin/dnmcli ];then 
+    sudo ln -sf $home_dir/script/dnmcli /usr/bin/dnmcli
 fi
 
 # 完成;
