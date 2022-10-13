@@ -55,12 +55,17 @@ sudo apt install -y trayer
 sudo apt install -y xsel xclip
 sudo apt install -y blueman
 sudo apt install -y light
-sudo dpkg -i ~/script/ubuntu/bat_0.22.1_amd64.deb
+sudo dpkg -i $script_dir/bat_0.22.1_amd64.deb
+sudo dpkg -i $script_dir/hyperfine_1.15.0_amd64.deb
 
 tldr tldr
 
 sudo apt install -y apt-file
 sudo apt-file update
+
+# httpie
+figlet 'httpie'
+sudo apt install -y httpie
 
 # bottom
 figlet 'btm'
@@ -230,6 +235,12 @@ if [ ! -e /usr/bin/vmsudo ];then
 fi
 if [ ! -e /usr/bin/dnmcli ];then 
     sudo ln -sf $home_dir/script/dnmcli /usr/bin/dnmcli
+fi
+if [ ! -e /usr/bin/duf ];then 
+    sudo ln -sf $home_dir/.config/duf /usr/bin/duf
+fi
+if [ ! -e /usr/bin/dust ];then 
+    sudo ln -sf $home_dir/.config/dust /usr/bin/dust
 fi
 
 # 完成;
