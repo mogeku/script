@@ -67,6 +67,10 @@ sudo apt-file update
 figlet 'httpie'
 sudo apt install -y httpie
 
+# shell_check
+figlet 'shellcheck'
+sudo apt install -y shellcheck
+
 # bottom
 figlet 'btm'
 curl -LO https://github.com/ClementTsang/bottom/releases/download/0.6.8/bottom_0.6.8_amd64.deb
