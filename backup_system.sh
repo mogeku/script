@@ -6,4 +6,4 @@
 
 backup_path=/backup_`date "+%Y%m%d"`_work.tgz
 
-sudo time tar cvpzf $backup_path --exclude=/media/* --exclude=/sys/* --exclude=/proc/* --exclude=/mnt/* --exclude=/tmp/* --exclude=/dev/* --exclude=/run/* --exclude=/home/momo/vmwareMachine/* --exclude=/home/momo/Downloads/* --exclude=$backup_path /
+time sudo tar cvpzf $backup_path --exclude=/media/* --exclude=/sys/* --exclude=/proc/* --exclude=/mnt/* --exclude=/tmp/* --exclude=/dev/* --exclude=/run/* --exclude=/home/momo/vmwareMachine/* --exclude=/home/momo/Downloads/* --exclude=/backup_* /
