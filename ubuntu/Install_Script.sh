@@ -118,6 +118,9 @@ sudo apt install -y fonts-symbola
 git clone git@github.com:mogeku/st.git ~/.config/st
 cd ~/.config/st && sudo make clean install
 
+# i3lock 锁屏
+sudo apt install -y i3lock
+
 # 安装node.js
 figlet 'node.js'
 # NodeSource 添加NodeSource源, 安装最新版本的nodejs
@@ -245,6 +248,9 @@ if [ ! -e /usr/bin/duf ];then
 fi
 if [ ! -e /usr/bin/dust ];then 
     sudo ln -sf $home_dir/.config/dust /usr/bin/dust
+fi
+if [ ! -e /usr/bin/lock ];then
+    sudo ln -sf /home/momo/script/lock-screen.sh /usr/bin/lock
 fi
 
 # 完成;
