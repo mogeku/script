@@ -27,9 +27,8 @@ dwm_nmcli () {
     # if STRENGTH is empty, we have a wired connection
     if [ "$STRENGTH" ]; then
         # printf "%s %s %s%%" "$IP" "$CONNAME" "$STRENGTH"
-        CONNAME=${CONNAME: 0: 4}
         if [ ${#CONNAME} -gt 4 ];then
-            CONNAME=${CONNAME}..
+            CONNAME=${CONNAME: 0: 4}..
         fi
 
         printf "%s|%s%%" "$(echo $CONNAME)" "$STRENGTH"
