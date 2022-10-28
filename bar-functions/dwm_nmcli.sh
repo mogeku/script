@@ -13,7 +13,7 @@ dwm_nmcli () {
         printf "NET "
     fi
 
-    NMCLI_OUTPUT=$(nmcli -f IN-USE,SIGNAL,SSID device wifi | grep '*')
+    NMCLI_OUTPUT=$(nmcli -f IN-USE,SIGNAL,SSID device wifi | grep '*' | grep -v '\-\-')
 
     if [ ! "$NMCLI_OUTPUT" ]; then
         printf "OFFLINE"
@@ -27,7 +27,12 @@ dwm_nmcli () {
     # if STRENGTH is empty, we have a wired connection
     if [ "$STRENGTH" ]; then
         # printf "%s %s %s%%" "$IP" "$CONNAME" "$STRENGTH"
-        printf "%s|%s%%" "$(echo $CONNAME | cut -b 1-3).." "$STRENGTH"
+        CONNAME=${CONNAME: 0: 4}
+        if [ ${#CONNAME} -gt 4 ];then
+            CONNAME=${CONNAME}..
+        fi
+
+        printf "%s|%s%%" "$(echo $CONNAME)" "$STRENGTH"
     else
         printf "%s" "$CONNAME"
     fi

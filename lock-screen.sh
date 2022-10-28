@@ -6,6 +6,6 @@
 # @Last Modified time: 2022-10-22 21:02:26
 
 img=$(find ~/Pictures/ -type f -name "*.png" | sort -R | head -n1)
-i3lock -e -t -i "$img"
+i3lock -e -i "$img"
 # xset dpms force off  #turn off screen at once
 
