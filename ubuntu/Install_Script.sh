@@ -25,7 +25,8 @@ sudo apt install -y figlet
 figlet ".config"
 sudo rm -rf ~/.config
 git clone --recurse-submodules git@github.com:mogeku/.config.git ~/.config
-sudo rm ~/.bashrc && ln -sf ~/.config/.bashrc ~/.bashrc
+sudo rm -rf ~/.bashrc && ln -sf ~/.config/.bashrc ~/.bashrc
+sudo rm -rf ~/.zshrc && ln -sf ~/.config/.zshrc ~/.zshrc
 
 # 安装gcc, g++, make, clang
 figlet 'c/c++'
@@ -82,10 +83,19 @@ sudo apt install -y fd-find
 sudo ln -sf $(which fdfind) /usr/local/bin/fd
 
 # fish
-figlet 'fish'
-sudo apt-add-repository -y ppa:fish-shell/release-3
-sudo apt update
-sudo apt install -y fish
+# figlet 'fish'
+# sudo apt-add-repository -y ppa:fish-shell/release-3
+# sudo apt update
+# sudo apt install -y fish
+
+# zsh
+figlet 'zsh'
+sudo apt install -y zsh
+figlet 'oh-my-zsh'
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://gitee.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
 
 # 安装exa
 figlet 'exa'
