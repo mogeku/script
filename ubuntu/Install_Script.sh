@@ -121,6 +121,7 @@ sudo apt install -y xorg libx11-dev libxft-dev libxinerama-dev suckless-tools dm
 git clone git@github.com:mogeku/dwm.git ~/.config/dwm
 cd ~/.config/dwm && sudo make clean install
 sudo cp $HOME/.config/dwm/dwm.desktop /usr/share/xsessions/
+ln -sf $HOME/.config/.xinitrc $HOME/.xinitrc
 
 # 安装st
 figlet 'st'
