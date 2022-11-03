@@ -45,54 +45,6 @@ export SEP2="]"
 #. "$DIR/bar-functions/dwm_vpn.sh"
 #. "$DIR/bar-functions/dwm_weather.sh"
 
-usbmon() {
-	usb1=$(lsblk -la | awk '/sdc1/ { print $1 }')
-	usb1mounted=$(lsblk -la | awk '/sdc1/ { print $7 }')
-
-	if [ "$usb1" ]; then
-		if [ -z "$usb1mounted" ]; then
-			echo " |"
-		else
-			echo " $usb1 |"
-		fi
-	fi
-}
-
-fsmon() {
-	ROTPART=$(df -h | awk '/\/$/ { print $3}') 
-	HOMEPART=$(df -h | awk '/\/home/ { print $3}') 
-	SWAPPART=$(cat /proc/swaps | awk '/\// { print $4 }')
-
-	echo "   $ROOTPART    $HOMEPART    $SWAPPART"
-}
-
-cpu() {
-	read -r cpu a b c previdle rest < /proc/stat
-	prevtotal=$((a+b+c+previdle))
-	sleep 0.5
-	read -r cpu a b c idle rest < /proc/stat
-	total=$((a+b+c+idle))
-	cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
-	echo $SEP1 "$cpu"%$SEP2
-}
-
-network() {
-	conntype=$(ip route | awk '/default/ { print substr($5,1,1) }' | head -n 1)
-
-    printf "%s" "$SEP1"
-	if [ -z "$conntype" ]; then
-        printf "%s" " down"
-	elif [ "$conntype" = "e" ]; then
-        printf "%s" " up"
-	elif [ "$conntype" = "w" ]; then
-        printf "%s" " up"
-	fi
-    printf "%s\n" "$SEP2"
-}
-
-# xsetroot -name "$(dwm_battery) | $(usbmon) $(ram) | $(cpu) | $(network) | $(volume_alsa) | $(clock)"
-
-
 # Append results of each func one by one to the upperbar string
 upperbar=""
 #upperbar="$upperbar$(dwm_alarm)"
