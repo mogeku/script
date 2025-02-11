@@ -166,7 +166,7 @@ function app_update_init() {
   figlet 'node.js'
   # NodeSource 添加NodeSource源, 安装最新版本的nodejs
   #curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-  sudo apt install -y nodejs
+  sudo apt install -y nodejs npm
   echo -------- node.js 版本 ----------
   node --version
   echo --------------------------------
@@ -235,11 +235,11 @@ function install_nvim() {
     [yY])
       # 安装 nvim
       figlet 'nvim'
-      sudo apt-add-repository -y ppa:neovim-ppa/stable
-      sudo apt update
-      sudo apt install -y neovim ccls
-      sudo rm -rf ~/script
+      sudo snap install nvim --classic
       git clone --recurse-submodules https://$github_repo/mogeku/nvim ~/.config/nvim
+      cd ~/.config/nvim
+      git remote set-url --push origin git@github.com:mogeku/nvim.git
+      cd -
       # 新开一个终端开始安装 vimplus 编辑器;
       gnome-terminal -- bash -c 'nvim;exec bash'
       sudo npm i -g bash-language-server;
@@ -352,7 +352,8 @@ function sys_reboot() {
 #github_proxy_set
 #pull_git_config
 #app_update_init
-install_nvim
+#install_nvim
+install_nerd_font
 exit
 
 if grep "Ubuntu" /etc/issue; then # 判断系统发行版是否为 Ubuntu
