@@ -194,14 +194,15 @@ function app_update_init() {
 
   # cmake
   figlet 'cmake'
-  sudo python -m pip install --upgrade pip
-  sudo python -m pip install cmake
+  sudo apt install -y cmake
   
   # lazygit
   figlet 'lazygit'
-  sudo apt-add-repository -y ppa:lazygit-team/release
-  sudo apt update
-  sudo apt install -y lazygit
+  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
+  curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+  tar xf lazygit.tar.gz lazygit
+  sudo install lazygit -D -t /usr/local/bin/
+  rm -rf lazygit.tar.gz lazygit
   
   # autojump
   figlet 'autojump'
@@ -350,7 +351,8 @@ function sys_reboot() {
 # ----- 程序开始位置 -----
 #github_proxy_set
 #pull_git_config
-app_update_init
+#app_update_init
+install_nvim
 exit
 
 if grep "Ubuntu" /etc/issue; then # 判断系统发行版是否为 Ubuntu
