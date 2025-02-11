@@ -353,7 +353,8 @@ function sys_reboot() {
 #pull_git_config
 #app_update_init
 #install_nvim
-install_nerd_font
+#install_nerd_font
+install_edge
 exit
 
 if grep "Ubuntu" /etc/issue; then # 判断系统发行版是否为 Ubuntu
