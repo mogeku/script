@@ -2,8 +2,14 @@
 set -x
 
 # 配置变量
-script_dir=$(cd `dirname $0`; pwd)
-home_dir=$(cd ~; pwd)
+script_dir=$(
+  cd $(dirname $0)
+  pwd
+)
+home_dir=$(
+  cd ~
+  pwd
+)
 
 github_repo="github.com"               # 默认 github 仓库域名
 github_raw="raw.githubusercontent.com" # 默认 github raw 域名
@@ -36,10 +42,10 @@ function pull_git_config() {
   echo
   echo "---------- 拉取config仓库 ----------"
   echo
-# 安装一个终端打印标题的软件;
+  # 安装一个终端打印标题的软件;
   sudo apt install -y git
 
-  git config --global user.email "haomingzidougeixle@gmail.com"	
+  git config --global user.email "haomingzidougeixle@gmail.com"
   git config --global user.name "momo"
 
   sudo rm -rf ~/script
@@ -94,58 +100,59 @@ function app_update_init() {
 
   # 安装一些工具；
   figlet 'tools'
-  sudo apt install -y neofetch 			# 系统信息打印
+  sudo apt install -y neofetch # 系统信息打印
   sudo apt install -y tree
   sudo apt install -y curl
-  sudo apt install -y ripgrep			# grep升级
+  sudo apt install -y fzf     # 模糊搜索
+  sudo apt install -y ripgrep # grep升级
   # sudo apt install -y feh			# 图片查看工具
-  sudo apt install -y tldr			# 命令用法查询工具
+  sudo apt install -y tldr # 命令用法查询工具
   # sudo apt install -y openssl-server
   sudo apt install -y xsel xclip
-  sudo apt install -y bat			# cat升级
+  sudo apt install -y bat # cat升级
 
-  sudo apt install -y eza			# ls升级
+  sudo apt install -y eza # ls升级
   # sudo ln -sf $HOME/.config/script/exa/bin/exa /usr/local/bin/exa
   # sudo cp $HOME/.config/script/exa/completions/exa.fish /usr/share/fish/vendor_completions.d/
   # sudo cp $HOME/.config/script/exa/man/* /usr/share/man/man1/
 
-  sudo apt install -y duf			# 磁盘空间查看工具
-  # if [ ! -e /usr/bin/duf ];then 
+  sudo apt install -y duf # 磁盘空间查看工具
+  # if [ ! -e /usr/bin/duf ];then
   #     sudo ln -sf $home_dir/.config/duf /usr/bin/duf
   # fi
-  
+
   #sudo dpkg -i $script_dir/bat_0.22.1_amd64.deb
   #sudo dpkg -i $script_dir/hyperfine_1.15.0_amd64.deb
-  
+
   tldr tldr
-  
+
   sudo apt install -y apt-file
   sudo apt-file update
-  
+
   # httpie
   figlet 'httpie'
   sudo apt install -y httpie
-  
+
   # shell_check
   figlet 'shellcheck'
   sudo apt install -y shellcheck
-  
+
   # bottom top 升级
   figlet 'btm'
   curl -LO https://github.com/ClementTsang/bottom/releases/download/0.10.2/bottom_0.10.2-1_amd64.deb
   sudo dpkg -i bottom_0.10.2-1_amd64.deb
   rm -rf bottom_0.10.2-1_amd64.deb
-  
+
   # fd find升级
   sudo apt install -y fd-find
   sudo ln -sf $(which fdfind) /usr/local/bin/fd
-  
+
   # fish
   # figlet 'fish'
   # sudo apt-add-repository -y ppa:fish-shell/release-3
   # sudo apt update
   # sudo apt install -y fish
-  
+
   # zsh
   figlet 'zsh'
   sudo apt install -y zsh
@@ -153,8 +160,7 @@ function app_update_init() {
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
   git clone https://gitee.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-  
-  
+
   # 安装node.js
   figlet 'node.js'
   # NodeSource 添加NodeSource源, 安装最新版本的nodejs
@@ -163,14 +169,14 @@ function app_update_init() {
   echo -------- node.js 版本 ----------
   node --version
   echo --------------------------------
-  
+
   # 安装golang
   figlet 'golang'
   sudo apt install -y golang
   echo -------- golang 版本 ----------
   go version
   echo --------------------------------
-  
+
   # 安装python
   #figlet 'python2'
   #sudo apt install -y python2 python2-dev
@@ -181,14 +187,14 @@ function app_update_init() {
   echo -------- python3 版本 ----------
   python3 --version
   echo --------------------------------
-  
+
   sudo rm -rf /usr/bin/python
   sudo ln -sf /usr/bin/python3 /usr/bin/python
 
   # cmake
   figlet 'cmake'
   sudo apt install -y cmake
-  
+
   # lazygit
   figlet 'lazygit'
   LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
@@ -196,7 +202,7 @@ function app_update_init() {
   tar xf lazygit.tar.gz lazygit
   sudo install lazygit -D -t /usr/local/bin/
   rm -rf lazygit.tar.gz lazygit
-  
+
   # autojump
   figlet 'autojump'
   git clone https://$github_repo/wting/autojump.git ~/tmp1111
@@ -204,17 +210,46 @@ function app_update_init() {
   cd ~ && rm -rf ~/tmp1111
 
   # dust 目录空间占用查看
-  if [ ! -e /usr/bin/dust ];then 
-      sudo ln -sf $home_dir/.config/dust /usr/bin/dust
+  if [ ! -e /usr/bin/dust ]; then
+    sudo ln -sf $home_dir/.config/dust /usr/bin/dust
   fi
 
   # ssh密钥免登陆脚本添加
-  if [ ! -e /usr/bin/addssh ];then 
-      sudo ln -sf ~/script/addssh.sh /usr/bin/addssh
+  if [ ! -e /usr/bin/addssh ]; then
+    sudo ln -sf ~/script/addssh.sh /usr/bin/addssh
   fi
 
   neofetch
   read -rp "按回车键继续"
+}
+
+# 安装配置yazi
+function install_yazi() {
+  echo
+  echo "---------- 安装配置 yazi ----------"
+  echo
+  while true; do
+    read -rp "安装配置 yazi ？(Y/n): " input
+    case $input in
+    [yY])
+      # 安装 yazi
+      figlet 'yazi'
+
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+      rustup update
+      git clone https://github.com/sxyazi/yazi.git ~/yazi
+      cd ~/yazi
+      cargo build --release --locked
+      sudo mv target/release/yazi target/release/ya /usr/local/bin/
+      cd -
+
+      break
+      ;;
+
+    [nN]) break ;;
+    *) echo "错误选项：$REPLY" ;;
+    esac
+  done
 }
 
 # 安装配置nvim
@@ -228,14 +263,21 @@ function install_nvim() {
     [yY])
       # 安装 nvim
       figlet 'nvim'
-      sudo snap install nvim --classic
+
+      sudo apt install ninja-build gettext cmake curl build-essential
+      git clone https://$github_repo/neovim/neovim ~/neovim
+      cd ~/neovim
+      rm -rf .deps
+      make CMAKE_BUILD_TYPE=RelWithDebInfo
+      sudo make install
+      cd -
+
       git clone --recurse-submodules https://$github_repo/mogeku/nvim ~/.config/nvim
       cd ~/.config/nvim
       git remote set-url --push origin git@github.com:mogeku/nvim.git
       cd -
       # 新开一个终端开始安装 vimplus 编辑器;
       gnome-terminal -- bash -c 'nvim;exec bash'
-      sudo npm i -g bash-language-server;
       break
       ;;
 
@@ -258,9 +300,9 @@ function install_nerd_font() {
       figlet 'NerdFont'
       mkdir -p ~/.local/share/fonts
       cp ~/.config/fonts/JetBrains\ Mono\ Bold\ Nerd\ Font\ Complete\ Mono.ttf ~/.local/share/fonts/
-      
+
       sudo chmod 744 ~/.local/share/fonts/JetBrains\ Mono\ Bold\ Nerd\ Font\ Complete\ Mono.ttf
-      
+
       fc-cache -vf
       break
       ;;
@@ -282,14 +324,14 @@ function install_edge() {
     [yY])
       # 安装edge
       figlet 'edge'
-      curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+      curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >microsoft.gpg
       sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/
       sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
       sudo rm microsoft.gpg
       sudo apt update
       sudo apt install microsoft-edge-dev
-      if [ ! -e /usr/bin/edge ];then 
-          sudo ln -sf /usr/bin/microsoft-edge /usr/bin/edge
+      if [ ! -e /usr/bin/edge ]; then
+        sudo ln -sf /usr/bin/microsoft-edge /usr/bin/edge
       fi
       break
       ;;
@@ -299,7 +341,6 @@ function install_edge() {
     esac
   done
 }
-
 
 # 清理 APT 空间
 function apt_clean() {
@@ -374,9 +415,9 @@ fi
 # sudo apt install -y exiftool        # 图片信息查看
 # sudo apt install -y atool           # 压缩文件
 # sudo apt install -y rar             # 压缩文件
-# 
+#
 # sudo pip3 install ueberzug          # 图片预览
-# 
+#
 # ranger --copy-config=all
-# 
+#
 # mkdir -p ~/.local/share/Trash/files
