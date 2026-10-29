@@ -2364,7 +2364,22 @@ run_under_lock() {
   flock -n -o "$STATE_DIR/lock" -c "touch $(printf %q "$held") && $cmd"
   rc=$?
   [[ -n $tmp_script ]] && rm -f "$tmp_script"
-  # 后面 launch-zsh / exit "$rc" 不动
+
+  if [[ $rc -eq 1 && ! -f $held ]]; then
+    return 1
+  fi
+  if [[ -f $STATE_DIR/launch-zsh ]]; then
+    zsh_bin=$(head -n 1 "$STATE_DIR/launch-zsh")
+    rm -f "$STATE_DIR/launch-zsh"
+    if [[ -x $zsh_bin && -t 0 && -t 1 ]]; then
+      trap - EXIT INT TERM
+      on_exit
+      printf '\n%s%s%s 进入 zsh，加载 %s%s%s\n' \
+        "$BOLD_GREEN" "$EMOJI_SUCCESS" "$RESET" "$BOLD" "$HOME/.zshrc" "$RESET"
+      exec "$zsh_bin" -l
+    fi
+  fi
+  exit "$rc"
 }
 
 enter_locked() {
