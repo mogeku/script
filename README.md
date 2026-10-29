@@ -1,1 +1,1 @@
-bash -c "$(wget https://raw.github.com/mogeku/script/refs/heads/master/ubuntu/setup.sh -O -)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/mogeku/script/master/ubuntu/setup.sh)"
