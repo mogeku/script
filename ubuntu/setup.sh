@@ -2349,26 +2349,22 @@ recover_stale_lock() {
 }
 
 run_under_lock() {
-  local cmd held=$STATE_DIR/lock.held rc zsh_bin
-  printf -v cmd '%q ' env SETUP_LOCK_HELD=1 bash "$0" "$@"
+  local cmd held=$STATE_DIR/lock.held rc zsh_bin script_path=$0 tmp_script=""
+  if [[ ! -f $script_path || $script_path == bash || $script_path == */bash ]]; then
+    if [[ -z ${BASH_EXECUTION_STRING:-} ]]; then
+      log_error_err "无法持锁重入。用 bash -c \"\$(curl -fsSL ...)\"，不要把脚本管道喂给 bash"
+      exit 1
+    fi
+    tmp_script=$(mktemp "${TMPDIR:-/tmp}/ubuntu-setup.XXXXXX.sh")
+    printf '%s\n' "$BASH_EXECUTION_STRING" >"$tmp_script"
+    script_path=$tmp_script
+  fi
+  printf -v cmd '%q ' env SETUP_LOCK_HELD=1 bash "$script_path" "$@"
   rm -f "$held"
   flock -n -o "$STATE_DIR/lock" -c "touch $(printf %q "$held") && $cmd"
   rc=$?
-  if [[ $rc -eq 1 && ! -f $held ]]; then
-    return 1
-  fi
-  if [[ -f $STATE_DIR/launch-zsh ]]; then
-    zsh_bin=$(head -n 1 "$STATE_DIR/launch-zsh")
-    rm -f "$STATE_DIR/launch-zsh"
-    if [[ -x $zsh_bin && -t 0 && -t 1 ]]; then
-      trap - EXIT INT TERM
-      on_exit
-      printf '\n%s%s%s 进入 zsh，加载 %s%s%s\n' \
-        "$BOLD_GREEN" "$EMOJI_SUCCESS" "$RESET" "$BOLD" "$HOME/.zshrc" "$RESET"
-      exec "$zsh_bin" -l
-    fi
-  fi
-  exit "$rc"
+  [[ -n $tmp_script ]] && rm -f "$tmp_script"
+  # 后面 launch-zsh / exit "$rc" 不动
 }
 
 enter_locked() {
