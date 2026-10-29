@@ -10,6 +10,7 @@
 # 直接执行：~/script/ubuntu/setup.sh  开头会 sudo 问一次密码。
 # 安装结束后把登录 shell 改成 zsh，并在当前终端进入 zsh 加载 ~/.zshrc。
 # SETUP_FORCE=1 忽略已成功记录，全部重跑（步骤本身仍然幂等）。
+# curl / wget 这类 bash -c 一行安装强制 SETUP_FORCE=1。直接执行脚本文件则尊重已有记录。
 # setup.sh uninstall  卸掉本脚本装上的组件，恢复软件源和 shell 链接。
 # setup.sh clear      清空已保存的选择，下次安装重新询问。
 # setup.sh -h         查看支持的命令。
@@ -1774,7 +1775,7 @@ usage() {
   usage_row "clear, --clear" "清空已保存的选择，下次安装重新询问"
   usage_row "-h, --help" "显示此帮助"
   printf '\n%s环境变量%s\n' "$BOLD" "$RESET"
-  usage_row "SETUP_FORCE=1" "忽略已成功记录，重跑安装步骤"
+  usage_row "SETUP_FORCE=1" "忽略已成功记录，重跑安装步骤。curl/wget 一行安装时强制为 1"
   usage_row "SETUP_GITHUB_MIRROR=1|0" "Github 国内加速"
   usage_row "SETUP_APT_MIRROR=1|0" "是否更换 APT 软件源"
   usage_row "SETUP_APT_SOURCE=域名" "指定 APT 镜像，跳过选择菜单"
@@ -1782,6 +1783,17 @@ usage() {
   usage_row "SETUP_EDGE=1|0" "是否安装 Microsoft Edge"
   usage_row "SETUP_SSH_KEY=1|0" "是否生成本机 SSH key 并上传到 GitHub"
   printf '\n'
+}
+
+# bash -c "$(curl|wget ...)"、管道喂给 bash、bash <(curl ...)。
+# 直接执行 ~/script/ubuntu/setup.sh 时 $0 是脚本路径，返回假。
+oneliner_invoke() {
+  [[ -n ${BASH_EXECUTION_STRING:-} ]] && return 0
+  case $0 in
+  /dev/fd/* | /proc/self/fd/*) return 0 ;;
+  bash | */bash) [[ ! -t 0 ]] ;;
+  *) return 1 ;;
+  esac
 }
 
 parse_args() {
@@ -2359,7 +2371,9 @@ run_under_lock() {
     printf '%s\n' "$BASH_EXECUTION_STRING" >"$tmp_script"
     script_path=$tmp_script
   fi
-  printf -v cmd '%q ' env SETUP_LOCK_HELD=1 bash "$script_path" "$@"
+  local -a run_env=(SETUP_LOCK_HELD=1)
+  [[ ${SETUP_FORCE:-0} == 1 ]] && run_env+=(SETUP_FORCE=1)
+  printf -v cmd '%q ' env "${run_env[@]}" bash "$script_path" "$@"
   rm -f "$held"
   flock -n -o "$STATE_DIR/lock" -c "touch $(printf %q "$held") && $cmd"
   rc=$?
@@ -2429,6 +2443,9 @@ finish_into_zsh() {
 
 main() {
   parse_args "$@"
+  if [[ $ACTION == install ]] && oneliner_invoke; then
+    export SETUP_FORCE=1
+  fi
   arm_traps
   tty_fix
   start_isig_keeper
@@ -2439,7 +2456,7 @@ main() {
   fi
   rm -f "$STATE_DIR/launch-zsh"
   touch "$LOG_FILE"
-  log "######## session $(date -Iseconds) ACTION=$ACTION ########"
+  log "######## session $(date -Iseconds) ACTION=$ACTION FORCE=${SETUP_FORCE:-0} ########"
 
   if [[ $ACTION == clear ]]; then
     if [[ -f $CHOICE_FILE ]]; then
